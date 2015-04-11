@@ -1,3 +1,15 @@
+# Sofar Sounds Music Reddit
+
+
+## Setup
+- Add user called Sofarbot
+- Add localhost ENV initializer (ignored by git)
+
+## if you get: undefined local variable or method acts_as_votable...
+- rails generate acts_as_votable:migration
+
+
+
 # Reddit-Hackernews-ProductHunt Clone on Rails
 
 **[DEMO](https://hackernews-rails-clone.herokuapp.com/)**
