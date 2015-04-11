@@ -34,8 +34,8 @@
       <% if item.user %>
         by <%= render_link_to_user(item.user) %>
       <% end %>
-      <%= link_to "#{time_ago_in_words(item.created_at)} ago", item %>
-      | <%= link_to "#{item.comments_count} comments", item %>
+      | <%= link_to "#{time_ago_in_words(item.created_at)} ago", item %>
+      | <%= link_to "#{item.comments_count} comments", item_path(item, anchor: 'comments') %>
     </small>
   </div>
 </li>
