@@ -102,7 +102,7 @@ namespace :sofar do
             puts "\tExists?\t\tNo, inserting!"
 
             # User ID 4 is SofarBot
-            Item.create(title: "#{artist} - #{song} @ Sofar #{location}", url: video_link, user_id: 4)
+            Item.create(title: "#{artist} - #{song} @ Sofar #{location}", url: video_link, user_id: ENV["BOT_USER_ID"].to_i)
           end
 
           # Print out to console
