@@ -2,6 +2,7 @@ class UserItemVotesController < ApplicationController
   before_action :set_item, :require_login
 
   def create
+    puts "VOTE PARAMS >>>> #{vote_params}"
     if current_user.votes.build(vote_params).save
       redirect_to :back, notice: "Upvoted."
     else
