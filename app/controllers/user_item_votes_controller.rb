@@ -3,11 +3,11 @@ class UserItemVotesController < ApplicationController
 
   def create
     puts "VOTE PARAMS >>>> #{vote_params}"
-    if current_user.votes.build(vote_params).save
-      redirect_to :back, notice: "Upvoted."
-    else
-      redirect_to :back, notice: "Already Upvoted."
-    end
+    # if current_user.votes.build(vote_params).save
+    #   redirect_to :back, notice: "Upvoted."
+    # else
+    #   redirect_to :back, notice: "Already Upvoted."
+    # end
   end
 
   def destroy
