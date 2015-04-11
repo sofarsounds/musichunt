@@ -22,12 +22,19 @@ class Item < ActiveRecord::Base
   scope :disabled, -> { where(disabled: true) }
   scope :newest, -> { order(score: :desc) }
 
+  # Tally the up/down votes! (into a signed int)
+  def score
+    self.votes_for.up.size - self.votes_for.down.size
+  end
+
+  # host section of url
   def host
     URI.parse(self.url).host
   rescue
     nil
   end
 
+  # bool - upvoted by specific user
   def up_voted_by?(user)
     assign_up_voters
 
@@ -38,6 +45,7 @@ class Item < ActiveRecord::Base
     end
   end
 
+  # bool - downvoted by specific user
   def down_voted_by?(user)
     assign_down_voters
 
