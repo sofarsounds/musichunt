@@ -12,6 +12,10 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'validate_url'
 
+# yotube import
+gem 'google-api-client'
+gem 'chronic' # date parser
+
 # This allows us to import bower packages
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-material-design'
