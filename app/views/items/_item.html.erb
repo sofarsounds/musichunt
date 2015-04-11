@@ -42,7 +42,7 @@
     <small>
 
       <!-- meta -->
-      <%= item.score %> points
+      <%= item.score %> <%= pluralize_without_count(item.score.abs, 'point') %>
       <% if item.user %>
         by <%= render_link_to_user(item.user) %>
       <% end %>
