@@ -2,23 +2,24 @@ class UserItemVotesController < ApplicationController
   before_action :set_item, :require_login
 
   def create
-    puts "VOTE PARAMS >>>> #{vote_params}"
-    # if current_user.votes.build(vote_params).save
-    #   redirect_to :back, notice: "Upvoted."
-    # else
-    #   redirect_to :back, notice: "Already Upvoted."
-    # end
+    if @item.votes_for.up.by_type(User).voters.collect {|x| x.id}.include?(current_user.id)
+      @item.unliked_by User.find(current_user.id)
+      redirect_to :back, notice: "Removed Upvote"
+    else
+      @item.upvote_from User.find(current_user.id)
+      redirect_to :back, notice: "Upvoted"
+    end
   end
 
   def destroy
-    vote = current_user.votes.where(vote_params).first
-    if vote
-      vote.destroy
-      message = 'Removed Vote.'
+    if @item.votes_for.down.by_type(User).voters.collect {|x| x.id}.include?(current_user.id)
+      @item.undisliked_by User.find(current_user.id)
+      redirect_to :back, notice: "Removed Downvote"
     else
-      message = 'No vote to remove.'
+      @item.downvote_from User.find(current_user.id)
+      redirect_to :back, notice: "Downvoted"
     end
-    redirect_to :back, notice: message
+    # redirect_to :back, notice: message
   end
 
   private

@@ -12,7 +12,7 @@ module UserItemVotesHelper
   end
 
   def votes_if_disliked(item)
-    link_to content_tag(:span, '', :class => 'glyphicon glyphicon-arrow-down'), vote_item_path(item.id), method: :post, class: 'text-danger'
+    link_to content_tag(:span, '', :class => 'glyphicon glyphicon-arrow-down'), vote_item_path(item.id), method: :delete, class: 'text-danger'
   end
 
   def votes_if_neutral(item)

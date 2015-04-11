@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :require_login, only: [:new, :create, :edit, :update, :toggle]
+  before_action :require_login, only: [:index, :new, :create, :edit, :update, :toggle]
   before_action :set_item, only: [:show]
   before_action :set_user_item, only: [:edit, :update, :toggle]
 
@@ -8,12 +8,7 @@ class ItemsController < ApplicationController
 
     @items = Item.order(order).includes(:user)
     @votes = @items.each_with_object({}) do |item, object|
-      #item.votes = item.votes_for.size
-      #object[item.id][:up] = item.get_upvotes.map(&:voter_id)
-      #puts Array.new(item.get_upvotes.map(&:voter_id), item.get_downvotes.map(&:voter_id))
       object[item.id] = item.votes_for.map(&:voter_id)
-      #object[:down] = item.get_downvotes.map(&:voter_id)
-      puts "OBJ >>>> #{object}"
     end
   end
 
