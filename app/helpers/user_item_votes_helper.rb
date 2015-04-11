@@ -9,9 +9,11 @@ module UserItemVotesHelper
 
   def render_votes_for_item(item=nil)
     if current_user && @votes[item.id].include?(current_user.id)
-      link_to_downvote(item)
+      "not liked"
+      #link_to_downvote(item)
     else
-      link_to_upvote(item)
+      "liked"
+      #link_to_upvote(item)
     end
   end
 
