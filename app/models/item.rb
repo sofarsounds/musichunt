@@ -24,7 +24,8 @@ class Item < ActiveRecord::Base
 
   # Tally the up/down votes! (into a signed int)
   def score
-    self.votes_for.up.size - self.votes_for.down.size
+    @score = (self.votes_for.up.size - self.votes_for.down.size) unless @score
+    @score
   end
 
   # host section of url
