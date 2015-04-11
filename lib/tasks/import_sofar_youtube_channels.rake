@@ -3,7 +3,7 @@ require 'youtube_session'
 namespace :sofar do
   namespace :youtube do
 
-    desc "Import Youtube data -> gdoc, Use arg to limit pages: import[5]"
+    desc "Import Youtube data -> DB, Use arg to limit pages: import[5] or import[all]"
     task :import, [:pages] => :environment do |t, args|
       #max_pages_processed = args.pages.blank? ? nil : args.pages.to_i
       max_pages_processed = args.pages.blank? ? 10 : args.pages.to_i
