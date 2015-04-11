@@ -30,6 +30,14 @@ disabled_user = User.create({
     disabled: true
   })
 
+bot = User.create({
+    username: "SofarBot",
+    password: "Housegig$",
+    password_confirmation: "Housegig$",
+    about: "A music sharing robot! Beep beep.",
+    admin: true
+  })
+
 # [
 #   {url: "https://producthunt.com", title: "Product Hunt - Best way to find new products and services"},
 #   {url: "https://news.ycombinator.com/", title: "Hacker News - fantastic articles about tech"},
