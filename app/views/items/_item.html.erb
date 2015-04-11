@@ -7,9 +7,16 @@
   </div>
   <div class="media-body">
     <h4 class="media-heading">
+      <% if item.host == "youtube.com"
+        vid_regex = /(youtu.be\/|youtube.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&\"\'>]+)/
+        vid_id = vid_regex.match(item.url)[5] # TODO: Not sure if this works with mobile/sharing youtube url formats
+        %>
+        <%= image_tag "http://img.youtube.com/vi/#{vid_id}/mqdefault.jpg", class: "media-thumb" %>
+      <% end %>
+
       <% if item.url.present? %>
         <%= link_to item.title, item.url, title: item.url, target: '_blank' %>
-        <small>(<%= URI.parse(item.url).host %>)</small>
+        <small>(<%= item.host %>)</small>
       <% else %>
         <%= link_to item.title, item, title: truncate(item.content, length: 30) %>
         <small><%= link_to '[discussion]', item %></small>
