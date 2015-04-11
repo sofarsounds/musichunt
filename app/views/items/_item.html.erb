@@ -1,19 +1,27 @@
 
 <li class="media">
+
+  <!-- vote buttons -->
   <div class="media-left">
-    <% if item.votes_for.up.by_type(User).voters.collect {|x| x.id}.include?(current_user.id) %>
-      <%= link_to content_tag(:span, '', :class => 'glyphicon glyphicon-triangle-top'), vote_item_path(item.id), method: :post, class: 'text-danger' %>
-      <%= link_to content_tag(:span, '', :class => 'glyphicon glyphicon-triangle-bottom'), vote_item_path(item.id), method: :delete, class: 'text-info' %>
-    <% elsif item.votes_for.down.by_type(User).voters.collect {|x| x.id}.include?(current_user.id) %>
-      <%= link_to content_tag(:span, '', :class => 'glyphicon glyphicon-triangle-top'), vote_item_path(item.id), method: :post, class: 'text-info' %>
-      <%= link_to content_tag(:span, '', :class => 'glyphicon glyphicon-triangle-bottom'), vote_item_path(item.id), method: :delete, class: 'text-danger' %>
+    <% if logged_in? and item.up_voted_by?(current_user) %>
+      <!-- up voted by current user -->
+      <%= link_to content_tag(:span, '',  :class => 'glyphicon glyphicon-triangle-top'),     vote_item_path(item.id), method: :post,     class: 'text-danger' %>
+      <%= link_to content_tag(:span, '',  :class => 'glyphicon glyphicon-triangle-bottom'),  vote_item_path(item.id), method: :delete,   class: 'text-info' %>
+    <% elsif logged_in? and item.down_voted_by?(current_user)  %>
+      <!-- down voted by current user -->
+      <%= link_to content_tag(:span, '',  :class => 'glyphicon glyphicon-triangle-top'),     vote_item_path(item.id), method: :post,     class: 'text-info' %>
+      <%= link_to content_tag(:span, '',  :class => 'glyphicon glyphicon-triangle-bottom'),  vote_item_path(item.id), method: :delete,   class: 'text-danger' %>
     <% else %>
-        <%= link_to content_tag(:span, '', :class => 'glyphicon glyphicon-triangle-top'), vote_item_path(item.id), method: :post, class: 'text-info' %>
-      <%= link_to content_tag(:span, '', :class => 'glyphicon glyphicon-triangle-bottom'), vote_item_path(item.id), method: :delete, class: 'text-info' %>
+      <!-- not voted for / not logged in -->
+      <%= link_to content_tag(:span, '',  :class => 'glyphicon glyphicon-triangle-top'),     vote_item_path(item.id), method: :post,     class: 'text-info' %>
+      <%= link_to content_tag(:span, '',  :class => 'glyphicon glyphicon-triangle-bottom'),  vote_item_path(item.id), method: :delete,   class: 'text-info' %>
     <% end %>
   </div>
+
   <div class="media-body">
     <h4 class="media-heading">
+
+      <!-- video thumb - if youtube -->
       <% if item.host == "youtube.com"
         vid_regex = /(youtu.be\/|youtube.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&\"\'>]+)/
         vid_id = vid_regex.match(item.url)[5] # TODO: Not sure if this works with mobile/sharing youtube url formats
@@ -21,6 +29,7 @@
         <%= image_tag "http://img.youtube.com/vi/#{vid_id}/mqdefault.jpg", class: "media-thumb" %>
       <% end %>
 
+      <!-- title -->
       <% if item.url.present? %>
         <%= link_to item.title, item.url, title: item.url, target: '_blank' %>
         <small>(<%= item.host %>)</small>
@@ -28,8 +37,11 @@
         <%= link_to item.title, item, title: truncate(item.content, length: 30) %>
         <small><%= link_to '[discussion]', item %></small>
       <% end %>
+
     </h4>
     <small>
+
+      <!-- meta -->
       <%= item.score %> points
       <% if item.user %>
         by <%= render_link_to_user(item.user) %>

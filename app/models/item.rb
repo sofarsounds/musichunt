@@ -28,4 +28,34 @@ class Item < ActiveRecord::Base
     nil
   end
 
+  def up_voted_by?(user)
+    assign_up_voters
+
+    if @up_voters.collect {|x| x.id}.include?(user.id)
+      true
+    else
+      false
+    end
+  end
+
+  def down_voted_by?(user)
+    assign_down_voters
+
+    if @down_voters.collect {|x| x.id}.include?(user.id)
+      true
+    else
+      false
+    end
+  end
+
+  protected
+    def assign_up_voters
+      @up_voters = self.votes_for.up.by_type(User).voters unless @up_voters
+      @up_voters
+    end
+    def assign_down_voters
+      @down_voters = self.votes_for.down.by_type(User).voters unless @down_voters
+      @down_voters
+    end
+
 end
