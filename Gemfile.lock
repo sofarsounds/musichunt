@@ -57,6 +57,7 @@ GEM
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
+    chronic (0.10.2)
     coderay (1.1.0)
     columnize (0.9.0)
     debug_inspector (0.0.2)
@@ -243,6 +244,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3.3)
   byebug
+  chronic
   dotenv-rails
   factory_girl_rails
   faker
