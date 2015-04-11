@@ -9,7 +9,11 @@ class ItemsController < ApplicationController
     @items = Item.order(order).includes(:user)
     @votes = @items.each_with_object({}) do |item, object|
       #item.votes = item.votes_for.size
+      #object[item.id][:up] = item.get_upvotes.map(&:voter_id)
+      #puts Array.new(item.get_upvotes.map(&:voter_id), item.get_downvotes.map(&:voter_id))
       object[item.id] = item.votes_for.map(&:voter_id)
+      #object[:down] = item.get_downvotes.map(&:voter_id)
+      puts "OBJ >>>> #{object}"
     end
   end
 
@@ -52,7 +56,7 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
     @votes = [@item].each_with_object({}) do |item, object|
-      object[item.id] = item.votes_for.map(&:voter_id)
+      object[item.id] = item.get_votes.map(&:voter_id)
     end
   end
 
