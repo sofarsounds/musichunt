@@ -21,4 +21,11 @@ class Item < ActiveRecord::Base
   scope :active, -> { where(disabled: false) }
   scope :disabled, -> { where(disabled: true) }
   scope :newest, -> { order(score: :desc) }
+
+  def host
+    URI.parse(self.url).host
+  rescue
+    nil
+  end
+
 end
