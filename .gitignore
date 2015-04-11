@@ -13,3 +13,4 @@
 /tmp
 .idea/
 config/initializers/dev_env.rb
+config/initializers/dev_env.rb
