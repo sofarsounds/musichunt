@@ -30,18 +30,17 @@ disabled_user = User.create({
     disabled: true
   })
 
-[
-  {url: "https://producthunt.com", title: "Product Hunt - Best way to find new products and services"},
-  {url: "https://news.ycombinator.com/", title: "Hacker News - fantastic articles about tech"},
-  {url: "https://reddit.com", title: "Reddit - front page of the internet"},
-  {title: "Reddit - front page of the internet", content: "Here's a content post, which is different than a url post"},
-].each do |item|
-  admin.items.create(item)
-  user.items.create(item)
-  disabled_user.items.create(item)
-end
+# [
+#   {url: "https://producthunt.com", title: "Product Hunt - Best way to find new products and services"},
+#   {url: "https://news.ycombinator.com/", title: "Hacker News - fantastic articles about tech"},
+#   {url: "https://reddit.com", title: "Reddit - front page of the internet"},
+#   {title: "Reddit - front page of the internet", content: "Here's a content post, which is different than a url post"},
+# ].each do |item|
+#   admin.items.create(item)
+#   user.items.create(item)
+#   disabled_user.items.create(item)
+# end
 
 [admin, user, disabled_user].each do |u|
   puts "created user: #{u.attributes.inspect}"
 end
-
